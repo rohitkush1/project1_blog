@@ -1,0 +1,38 @@
+{% load blog_tags %}
+{% load static %}
+
+<html>
+<head>
+  <title>{% block title %}{% endblock %}</title>
+  <link href="{% static "css/blog.css" %}" rel="stylesheet">
+</head>
+<body>
+  <div id="content">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <div id="sidebar">
+    <h2>My blog</h2>
+    <p>Created By <a href ="https://www.linkedin.com/in/rohit-kushwaha1/"> View Profile</a></p>
+    
+    <p>This blog is an online education plateform where we are provide free topics on computer programming language and tech topics.
+      we comeup each day with new and quality content.<br>
+      <br>
+      here you can have several topics from very basic and informative.
+    </p>
+    <p><h4> I 've Written {% total_posts %} posts so far</h4></p>
+    <h3>Latest Posts</h3>
+    {% show_latest_posts 3 %}
+
+    <h3>Most Commented Post </h3>
+    {% get_most_commented_posts as get_most_commented_posts %}
+    <ul>
+      {% for post in get_most_commented_posts %}
+      <li>
+        <a href = "{{ post.get_absolute_url }}">{{ post.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</body>
+</html>
